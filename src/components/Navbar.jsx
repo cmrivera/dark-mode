@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from "react";
-import DarkModeToggle from "react-dark-mode-toggle";
-import { darkTheme, lightMode } from "../hooks/useDarkMode";
+import React, { useEffect } from "react";
+
+import { useDarkMode } from "../hooks/useDarkMode";
 
 const Navbar = () => {
-  const [darkMode, setDarkMode] = useState("light");
-  const [darkMode, togglearkMode] = darkTheme;
+  const [darkMode, setDarkMode] = useDarkMode(false);
+
   const toggleMode = (e) => {
     e.preventDefault();
     if (darkMode === "light") {
-      window.localStorage.setItem("darkMode", "dark");
-      setDarkMode("dark");
+      setDarkMode(!darkMode);
       //otherwise make lightMode
     } else {
-      window.localStorage.setItem("darkMode", "light");
-      setDarkMode("light");
     }
   };
 
@@ -22,7 +19,7 @@ const Navbar = () => {
     if (localMode) {
       setDarkMode(localMode);
     }
-  }, []);
+  }, [darkMode, setDarkMode]);
 
   return (
     <nav className="navbar">
