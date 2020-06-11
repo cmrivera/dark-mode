@@ -12,7 +12,7 @@ export const useDarkMode = (key) => {
       : () => {
           document.body.className = null;
         };
-  }, [darkMode]);
+  }, [darkMode, setDarkMode]);
 
   return [darkMode, setDarkMode];
 };
