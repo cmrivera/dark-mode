@@ -1,25 +1,26 @@
-import React, { useEffect } from "react";
-
+import React from "react";
 import { useDarkMode } from "../hooks/useDarkMode";
+import { useLightMode } from "../hooks/useLightMode";
 
 const Navbar = () => {
   const [darkMode, setDarkMode] = useDarkMode(false);
+  const [lightMode, setLightMode] = useLightMode(false);
 
   const toggleMode = (e) => {
     e.preventDefault();
-    if (darkMode === "light") {
-      setDarkMode(!darkMode);
-      //otherwise make lightMode
-    } else {
-    }
+    setDarkMode(!darkMode);
+    //otherwise make lightMode
   };
-
-  useEffect(() => {
+  const toggleLight = (e) => {
+    e.preventDefault();
+    setLightMode(!lightMode);
+  };
+  /* useEffect(() => {
     const localMode = window.localStorage.getItem("darkMode");
     if (localMode) {
       setDarkMode(localMode);
     }
-  }, [darkMode, setDarkMode]);
+  }, [darkMode, setDarkMode]);*/
 
   return (
     <nav className="navbar">
@@ -29,9 +30,12 @@ const Navbar = () => {
           onClick={toggleMode}
           className={darkMode ? "toggle toggled" : "toggle"}
         />
+        <div
+          onClick={toggleLight}
+          className={lightMode ? "toggle toggled" : "toggle"}
+        />
       </div>
     </nav>
   );
 };
-
 export default Navbar;

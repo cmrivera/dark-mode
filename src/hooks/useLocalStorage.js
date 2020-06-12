@@ -1,13 +1,10 @@
 import { useState } from "react";
 
 //set up state
-const useLocalStorage = (initialValue, key) => {
+export const useLocalStorage = (key, initialValue) => {
   const [storedValue, setStoredValue] = useState(() => {
-    if (window.localStorage.getItem(key)) {
-      return JSON.parse(window.localStorage.getItem(key));
-    }
-    window.localStorage.setItem(key, JSON.stringify(initialValue));
-    return initialValue;
+    const holdValue = window.localStorage.getItem(key);
+    return holdValue ? JSON.parse(holdValue) : initialValue;
   });
   //capture values
   //if localStorage data, use that, if not then use initialValues
@@ -18,4 +15,3 @@ const useLocalStorage = (initialValue, key) => {
   };
   return [storedValue, setValue];
 };
-export default useLocalStorage;
